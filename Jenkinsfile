@@ -41,6 +41,7 @@ pipeline{
             steps{
                 echo "====++++ executing Deploy... ++++===="
                 sh 'nohup npm start > output.log &'
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
             }
             post{
                 always{
