@@ -22,6 +22,7 @@ pipeline{
         stage("Test"){
             steps{
                 echo "====++++ executing Test... ++++===="
+                sh 'npm test'
             }
             post{
                 always{
@@ -39,6 +40,7 @@ pipeline{
         stage("Deploy"){
             steps{
                 echo "====++++ executing Deploy... ++++===="
+                sh 'npm start'
             }
             post{
                 always{
@@ -56,7 +58,7 @@ pipeline{
     }
     post{
         always{
-            echo "========always========"
+            echo "======== pipeline finished! ========"
         }
         success{
             echo "========pipeline executed successfully ========"
