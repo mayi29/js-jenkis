@@ -40,7 +40,7 @@ pipeline{
         stage("Deploy"){
             steps{
                 echo "====++++ executing Deploy... ++++===="
-                sh 'npm start'
+                sh 'nohup npm start > output.log &'
             }
             post{
                 always{
