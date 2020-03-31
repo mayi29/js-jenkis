@@ -11,10 +11,10 @@ pipeline{
                     echo "====++++ Build Finished! ++++===="
                 }
                 success{
-                    echo "====++++ Build executed succesfully! :) ++++===="
+                    echo "====++++ Build executed succesfully! ++++===="
                 }
                 failure{
-                    echo "====++++ Build execution failed :( ++++===="
+                    echo "====++++ Build execution failed ++++===="
                 }
         
             }
@@ -40,8 +40,11 @@ pipeline{
         stage("Deploy"){
             steps{
                 echo "====++++ executing Deploy... ++++===="
-                sh 'nohup npm start > output.log &'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                // sh 'nohup npm start > output.log &'
+                // input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                sh 'ssh deploy@serenebrown.ibmlatin.skytapdns.com mkdir -p /home/desktop/www/deploy'
+                sh 'scp -r dist deploy@serenebrown.ibmlatin.skytapdns.com:/home/desktop/www/deploy/dist/'
+                sh 'ssh deploy@serenebrown.ibmlatin.skytapdns.com cd /home/desktop/www/deploy && npx http-server dist/ -p 4200'
             }
             post{
                 always{
