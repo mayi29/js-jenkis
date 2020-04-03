@@ -42,9 +42,9 @@ pipeline{
                 echo "====++++ executing Deploy... ++++===="
                 sh 'nohup npm start > output.log &'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh 'ssh deploy@distractedboyd.ibmlatin.skytapdns.com -o StrictHostKeyChecking=no mkdir -p /home/desktop/www/deploy'
-                sh 'scp -r dist deploy@distractedboyd.ibmlatin.skytapdns.com:/home/desktop/www/deploy/dist/'
-                sh 'ssh deploy@distractedboyd.ibmlatin.skytapdns.com -o StrictHostKeyChecking=no cd /home/desktop/www/deploy && npm start'
+                sh 'ssh deploy@distractedboyd.ibmlatin.skytapdns.com mkdir -p /home/deploy/desktop/www/prod'
+                sh 'scp -r / deploy@distractedboyd.ibmlatin.skytapdns.com:/home/deploy/desktop/www/prod'
+                sh 'ssh deploy@distractedboyd.ibmlatin.skytapdns.com cd /home/deploy/desktop/www/prod && npm start'
             }
             post{
                 always{
